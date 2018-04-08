@@ -26,7 +26,7 @@ PICO-8 has a GPIO interface supporting 128 pins, each of which can store a 128-b
 
 This means that if you want to pass GPIO information that can be used easily with any platform that runs PICO-8, you only get six on-and-off slots, which doesn't sound that great. Until you consider that you can still use those 6 slots to encode an integer up to 6 bits (-32 to 31 signed, or 0 to 63 unsigned!). Even a 3-bit int (0-7 unsigned) can often be enough to encode meaningful state information for many games, which can be used to trigger vibrations, color lights, etc.
 
-The trouble is, taking a decimal value and encoding it as binary with PICO-8's built-in GPIO functions, then reading it again later, is not simple. GPIO Messenger provides utility functions which abstract away the bit-shifting and let you just read and write numbers.
+The trouble is, taking a decimal value and encoding it as binary with PICO-8's built-in GPIO functions, then reading it again later, is not simple. PICO-8 Messenger provides utility functions which abstract away the bit-shifting and let you just read and write numbers.
 
 ## including in pico-8
 
