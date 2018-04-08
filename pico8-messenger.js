@@ -17,15 +17,11 @@ function readFromGpio(gpio, pinIndex, bits) {
 }
 
 function readFromGpioUnsigned(gpio, pinIndex, bits) {
-  return gpio
-    .slice(pinIndex, pinIndex + bits)
-    .reduce(function (num, val, i) {
-      return num + (
-        val
-          ? (1 << (bits - 1 - i))
-          : 0
-      );
-    }, 0);
+  var num = 0;
+  for (var i = 0; i < bits; i++) {
+    num += gpio[pinIndex + i] ? (1 << (bits - 1 - i)) : 0;
+  }
+  return num;
 }
 
 if (typeof module !== 'undefined' && module) {
