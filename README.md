@@ -97,31 +97,31 @@ For all of these functions:
 * `pin_index` or `pinIndex` is index in the GPIO array (0-127) where storage for this number should begin (in other words, the location of the largest, left-most bit)
 * `bits` is the number of bits required to store the maximum value for this number
 
-Lua:
+### Lua
 
 These functions wrap PICO-8's `peek` and `poke` functions to read and write data in the GPIO slots.
 
-### `function write_gpio(num, pin_index, bits)`
+#### `function write_gpio(num, pin_index, bits)`
 
-### `function write_gpio_unsigned(num, pin_index, bits)`
+#### `function write_gpio_unsigned(num, pin_index, bits)`
 
-### `function read_gpio(pin_index, bits)`
+#### `function read_gpio(pin_index, bits)`
 
-### `function read_gpio_unsigned(pin_index,bits)`
+#### `function read_gpio_unsigned(pin_index,bits)`
 
-JavaScript:
+### JavaScript
 
 All of these functions assume `gpio` is a 128-length array filled with numbers that are either 0 or 255. Although these are intended for handling PICO-8 data, they can be used anywhere it could be useful to encode numbers in a binary array.
 
 *Note*: The write functions mutate the `gpio` argument - clone first with `var gpioClone = gpio.slice()` if you don't want that.
 
-### `function writeToGpio(gpio, num, pinIndex, bits)`
+#### `function writeToGpio(gpio, num, pinIndex, bits)`
 
-### `function writeToGpioUnsigned(gpio, num, pinIndex, bits)`
+#### `function writeToGpioUnsigned(gpio, num, pinIndex, bits)`
 
-### `function readFromGpio(gpio, pinIndex, bits)`
+#### `function readFromGpio(gpio, pinIndex, bits)`
 
-### `function readFromGpioUnsigned(gpio, pinIndex, bits)`
+#### `function readFromGpioUnsigned(gpio, pinIndex, bits)`
 
 ## How can I check when my GPIO pins have updated?
 
