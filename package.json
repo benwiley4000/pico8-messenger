@@ -1,0 +1,28 @@
+{
+  "name": "pico8-messenger",
+  "version": "0.1.0",
+  "description": "Pass integers between PICO-8 and the outside world",
+  "main": "pico8-messenger.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benwiley4000/pico8-messenger.git"
+  },
+  "keywords": [
+    "pico-8",
+    "gpio",
+    "bits",
+    "web",
+    "binary",
+    "io",
+    "game-development"
+  ],
+  "author": "Ben Wiley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benwiley4000/pico8-messenger/issues"
+  },
+  "homepage": "https://github.com/benwiley4000/pico8-messenger#readme"
+}
