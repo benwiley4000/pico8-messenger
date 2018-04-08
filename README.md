@@ -28,6 +28,21 @@ This means that if you want to pass GPIO information that can be used easily wit
 
 The trouble is, taking a decimal value and encoding it as binary with PICO-8's built-in GPIO functions, then reading it again later, is not simple. GPIO Messenger provides utility functions which abstract away the bit-shifting and let you just read and write numbers.
 
+## including in pico-8
+
+Copy the functions you need from pico8-messenger.lua into your .p8 file.
+
+```lua
+-- included definition for write_gpio
+-- included definition for read_gpio
+
+-- write the number -1 to bits 2 through 4
+write_gpio(-1, 2, 3)
+
+-- print out the number stored in bits 5 through 7
+print(read_gpio(5, 3), 8, 8, 7)
+```
+
 ## including via script tag
 
 You can download pico8-messenger.js and include it in your page with a script tag:
@@ -40,8 +55,8 @@ You can download pico8-messenger.js and include it in your page with a script ta
   // get some number stored in bits 2 through 4
   var numFromPico8 = readFromGpio(pico8_gpio, 2, 3);
 
-  // send the number 6 to pico-8 stored in bits 5 through 7
-  writeToGpio(pico8_gpio, 6, 5, 3);
+  // send the number 2 to pico-8 stored in bits 5 through 7
+  writeToGpio(pico8_gpio, 2, 5, 3);
 </script>
 ```
 
