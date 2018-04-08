@@ -123,7 +123,7 @@ All of these functions assume `gpio` is a 128-length array filled with numbers t
 
 #### `function readFromGpioUnsigned(gpio, pinIndex, bits)`
 
-## How can I check when my GPIO pins have updated?
+## how can I check when my GPIO pins have updated?
 
 In PICO-8 it makes sense to just use the game update loop:
 
