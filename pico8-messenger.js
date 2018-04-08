@@ -22,7 +22,7 @@ function readFromGpioUnsigned(gpio, pinIndex, bits) {
     .reduce(function (num, val, i) {
       return num + (
         val
-          ? Math.pow(2, bits - 1 - i)
+          ? (1 << (bits - 1 - i))
           : 0
       );
     }, 0);

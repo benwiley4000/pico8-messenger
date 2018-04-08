@@ -31,7 +31,7 @@ function read_gpio_unsigned(pin_index,bits)
  for j=0,bits-1 do
   local val = peek(firstbit_i+j)
   if val > 0 then
-   num = num + 2^(bits-1-j)
+   num = num + shl(1, bits-1-j)
   end
  end
  return num
