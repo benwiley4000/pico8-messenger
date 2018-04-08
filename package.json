@@ -1,6 +1,6 @@
 {
   "name": "pico8-messenger",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Pass integers between PICO-8 and the outside world",
   "main": "pico8-messenger.js",
   "scripts": {
