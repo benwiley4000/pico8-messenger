@@ -1,5 +1,5 @@
 function writeToGpio(gpio, num, pinIndex, bits) {
-  writeToGpio(gpio, num + (1 << (bits - 1)), pinIndex, bits);
+  writeToGpioUnsigned(gpio, num + (1 << (bits - 1)), pinIndex, bits);
 }
 
 function writeToGpioUnsigned(gpio, num, pinIndex, bits) {
