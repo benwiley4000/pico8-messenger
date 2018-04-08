@@ -8,21 +8,21 @@ In PICO-8:
 
 ```lua
 -- write the number 7 (needs 3 bits),
--- starting at GPIO pin 5
-write_gpio_unsigned(7, 5, 3)
+-- starting at GPIO pin 4
+write_gpio_unsigned(7, 4, 3)
 ```
 
 Then, in the browser:
 
 ```javascript
 // log the number encompassing 3 bits,
-// starting at GPIO pin 5
-console.log(readFromGpioUnsigned(5, 3)); // 7
+// starting at GPIO pin 4
+console.log(readFromGpioUnsigned(4, 3)); // 7
 ```
 
 ## why
 
-PICO-8 has a GPIO interface supporting 128 pins, each of which can store a 128-bit unsigned integer (0-255). However Raspberry PI and CHIP only support consuming each GPIO pin as a single bit (0 or 255), and only have pins for a small subset of the 128 virtual slots. The Pocket CHIP only has 6 fully-exposed pins (indices 2-7).
+PICO-8 has a GPIO interface supporting 128 pins, each of which can store a 128-bit unsigned integer (0-255). However Raspberry PI and CHIP only support consuming each GPIO pin as a single bit (0 or 255), and only have pins for a small subset of the 128 virtual slots. The Pocket CHIP only has 6 fully-exposed pins (indices 1-6).
 
 This means that if you want to pass GPIO information that can be used easily with any platform that runs PICO-8, you only get six on-and-off slots, which doesn't sound that great. Until you consider that you can still use those 6 slots to encode an integer up to 6 bits (-32 to 31 signed, or 0 to 63 unsigned!). Even a 3-bit int (0-7 unsigned) can often be enough to encode meaningful state information for many games, which can be used to trigger vibrations, color lights, etc.
 
@@ -36,11 +36,11 @@ Copy the functions you need from pico8-messenger.lua into your .p8 file.
 -- included definition for write_gpio
 -- included definition for read_gpio
 
--- write the number -1 to bits 2 through 4
-write_gpio(-1, 2, 3)
+-- write the number -1 to bits 1 through 3
+write_gpio(-1, 1, 3)
 
--- print out the number stored in bits 5 through 7
-print(read_gpio(5, 3), 8, 8, 7)
+-- print out the number stored in bits 4 through 6
+print(read_gpio(4, 3), 8, 8, 7)
 ```
 
 ## including via script tag
@@ -52,11 +52,11 @@ You can download pico8-messenger.js and include it in your page with a script ta
 <script>
   pico8_gpio = pico8_gpio || Array(128);
 
-  // get some number stored in bits 2 through 4
-  var numFromPico8 = readFromGpio(pico8_gpio, 2, 3);
+  // get some number stored in bits 1 through 3
+  var numFromPico8 = readFromGpio(pico8_gpio, 1, 3);
 
-  // send the number 2 to pico-8 stored in bits 5 through 7
-  writeToGpio(pico8_gpio, 2, 5, 3);
+  // send the number 2 to pico-8 stored in bits 4 through 6
+  writeToGpio(pico8_gpio, 2, 4, 3);
 </script>
 ```
 
@@ -83,11 +83,11 @@ var p8messenger = require('pico8-messenger');
 
 window.pico8_gpio = window.pico8_gpio || Array(128);
 
-// get some number stored in bits 2 through 4
-var numFromPico8 = readFromGpio(pico8_gpio, 2, 3);
+// get some number stored in bits 1 through 3
+var numFromPico8 = readFromGpio(pico8_gpio, 1, 3);
 
-// send the number 6 to pico-8 stored in bits 5 through 7
-writeToGpio(pico8_gpio, 6, 5, 3);
+// send the number 6 to pico-8 stored in bits 4 through 6
+writeToGpio(pico8_gpio, 6, 4, 3);
 ```
 
 ## API
@@ -132,7 +132,7 @@ number_from_outside = 0
 
 function _update()
  number_from_outside =
-  read_gpio_unsigned(5, 3)
+  read_gpio_unsigned(4, 3)
 end
 ```
 
@@ -142,7 +142,7 @@ In JavaScript you're probably not running a game loop... so this is annoying! Yo
 var gpio = getP8Gpio();
 var lastNumber = -1;
 gpio.subscribe(function() {
-  var num = readFromGpioUnsigned(gpio, 5, 3);
+  var num = readFromGpioUnsigned(gpio, 4, 3);
   if (num !== lastNumber) {
     console.log('Here is a new number I got from PICO-8:', num);
     lastNumber = num;
@@ -177,4 +177,4 @@ Here's a table showing the integer ranges (signed and unsigned) you can get with
 
 If you use all of these bits to store a 128-bit integer, [you can safely store an unsigned integer up to 999.99999999999999999999999999999999999 Undecillion](https://en.wikipedia.org/wiki/Integer_(computer_science)#Common_integral_data_types). However PICO-8 only stores 16-bit signed integers (between -32768 and 32767), so this probably won't be very useful to you (among other reasons).
 
-If you want it to be possible to integrate your game with GPIO pins on Pocket CHIP, the best bet is to only use pins 2-7. If you just want to target non-Pocket CHIP and Raspberry PI, you can use pins 0-7. If all you want to target is the web, you're free to use as many slots as you want, but you might not need them. For my game, we're using six pins to store two 3-bit integers, which is enough to communicate the game state relevant to vibration support.
+If you want it to be possible to integrate your game with GPIO pins on Pocket CHIP, the best bet is to only use pins 1-6. If you just want to target non-Pocket CHIP and Raspberry PI, you can use pins 0-7. If all you want to target is the web, you're free to use as many slots as you want, but you might not need them. For my game, we're using six pins to store two 3-bit integers, which is enough to communicate the game state relevant to vibration support.
